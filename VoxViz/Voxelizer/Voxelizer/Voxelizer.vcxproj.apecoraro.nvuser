@@ -1,0 +1,5 @@
+﻿<ProjectSettingsModel DefinitionId="a218e900-1199-4ab1-a767-7976786f04d4" DisplayName="Nexus Project User Settings" xmlns="clr-namespace:Ark.PropertyModel;assembly=Ark">
+    <SettingsPointModel DefinitionId="3eb7ba04-016d-475e-b0ff-daa5f0e59a08" DisplayName="Launch">
+        <Property Name="Arguments" Value="--input ../../../geotypic_ive_dds/master.osg --output Demo --filter-bbox -96.0 -96.0 96.0 96.0 --geocentric --terrain-texture-prefix 0_ --terrain-texture asphalt_path.bmp --terrain-texture grass_sand2.bmp --terrain-texture runway.bmp --terrain-texture taxiway.bmp --terrain-texture train1.bmp --terrain-texture water.bmp" />
+    </SettingsPointModel>
+</ProjectSettingsModel>

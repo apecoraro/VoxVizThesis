@@ -1,0 +1,136 @@
+#include "Frustum.h"
+#include <math.h>
+#include <stdio.h>
+
+using namespace vox;
+
+#define HALF_ANG2RAD 3.14159265358979323846/360.0 
+
+Frustum::Frustum() {}
+
+Frustum::~Frustum() {}
+
+void Frustum::setCamInternals(float angle, float ratio, float nearD, float farD) 
+{
+	// store the information
+	this->ratio = ratio;
+	this->angle = angle * HALF_ANG2RAD;
+	this->nearD = nearD;
+	this->farD = farD;
+
+	// compute width and height of the near and far plane sections
+	tang = tan(this->angle);
+	sphereFactorY = 1.0/cos(this->angle);//tang * sin(this->angle) + cos(this->angle);
+
+	float anglex = atan(tang*ratio);
+	sphereFactorX = 1.0/cos(anglex); //tang*ratio * sin(anglex) + cos(anglex);
+
+	nh = nearD * tang;
+	nw = nh * ratio; 
+
+	fh = farD * tang;
+	fw = fh * ratio;
+}
+
+void Frustum::setCamDef(const QVector3D &p, const QVector3D &l, const QVector3D &u) 
+{
+	QVector3D dir,nc,fc;
+
+	camPos = p;
+
+	// compute the Z axis of camera
+	Z = p - l;
+	Z.normalize();
+
+	// X axis of camera of given "up" vector and Z axis
+	X = u * Z;
+	X.normalize();
+
+	// the real "up" vector is the cross product of Z and X
+	Y = Z * X;
+
+	// compute the center of the near and far planes
+	nc = p - Z * nearD;
+	fc = p - Z * farD;
+
+	// compute the 8 corners of the frustum
+	ntl = nc + Y * nh - X * nw;
+	ntr = nc + Y * nh + X * nw;
+	nbl = nc - Y * nh - X * nw;
+	nbr = nc - Y * nh + X * nw;
+
+	ftl = fc + Y * fh - X * fw;
+	fbr = fc - Y * fh + X * fw;
+	ftr = fc + Y * fh + X * fw;
+	fbl = fc - Y * fh - X * fw;
+
+	// compute the six planes
+	// the function set3Points asssumes that the points
+	// are given in counter clockwise order
+	pl[TOP].set3Points(ntr,ntl,ftl);
+	pl[BOTTOM].set3Points(nbl,nbr,fbr);
+	pl[LEFT].set3Points(ntl,nbl,fbl);
+	pl[RIGHT].set3Points(nbr,ntr,fbr);
+//	pl[NEARP].set3Points(ntl,ntr,nbr);
+//	pl[FARP].set3Points(ftr,ftl,fbl);
+
+	pl[NEARP].setNormalAndPoint(-Z,nc);
+	pl[FARP].setNormalAndPoint(Z,fc);
+
+	QVector3D aux,normal;
+
+	aux = (nc + Y*nh) - p;
+	normal = aux * X;
+	pl[TOP].setNormalAndPoint(normal,nc+Y*nh);
+
+	aux = (nc - Y*nh) - p;
+	normal = X * aux;
+	pl[BOTTOM].setNormalAndPoint(normal,nc-Y*nh);
+	
+	aux = (nc - X*nw) - p;
+	normal = aux * Y;
+	pl[LEFT].setNormalAndPoint(normal,nc-X*nw);
+
+	aux = (nc + X*nw) - p;
+	normal = Y * aux;
+	pl[RIGHT].setNormalAndPoint(normal,nc+X*nw);
+}
+
+Frustum::RESULT Frustum::sphereInFrustum(const QVector3D &p, float radius)
+{
+	float d1,d2;
+	float az,ax,ay,zz1,zz2;
+	RESULT result = INSIDE;
+
+	QVector3D v = p-camPos;
+
+	az = QVector3D::dotProduct(v, -Z);
+	if (az > farD + radius || az < nearD-radius)
+		return(OUTSIDE);
+
+	ax = QVector3D::dotProduct(v, X);
+	zz1 = az * tang * ratio;
+	d1 = sphereFactorX * radius;
+	if (ax > zz1+d1 || ax < -zz1-d1)
+		return(OUTSIDE);
+
+	ay = QVector3D::dotProduct(v, Y);
+	zz2 = az * tang;
+	d2 = sphereFactorY * radius;
+	if (ay > zz2+d2 || ay < -zz2-d2)
+		return(OUTSIDE);
+
+	if (az > farD - radius || az < nearD+radius)
+		result = INTERSECT;
+	if (ay > zz2-d2 || ay < -zz2+d2)
+		result = INTERSECT;
+	if (ax > zz1-d1 || ax < -zz1+d1)
+		result = INTERSECT;
+
+	return(result);
+}
+
+float Frustum::computeDistToNearPlane(const QVector3D& p)
+{
+    return (float)pl[NEARP].eval(p);
+}

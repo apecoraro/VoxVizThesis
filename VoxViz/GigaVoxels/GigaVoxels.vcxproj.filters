@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{625d25f5-e9fa-48dc-bab9-fc92bd34d0b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{b59270a8-d419-4637-b24e-b5ddd15f585d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{05574068-1c84-4ed3-8a8d-346f663eee8c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Shaders\GigaVoxels.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\Shaders\GigaVoxels.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\Shaders\GenerateSelectionMask.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\Shaders\GenerateHistoPyramid.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\Shaders\ComputeActiveTexels.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\Shaders\CompressNodeUsageList.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\Shaders\GigaVoxelsDebugRenderer.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\Shaders\GigaVoxelsDebugRenderer.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\Shaders\GigaVoxelsNodeWireFrame.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\Shaders\GigaVoxelsNodeWireFrameNoLighting.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\Shaders\GigaVoxelsNoLighting.frag">
+      <Filter>Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GigaVoxelsRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GigaVoxelsOctTreeNodePool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GigaVoxelsOctTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GigaVoxelsBrickPool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GigaVoxelsShaderCodeTester.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GigaVoxelsReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GigaVoxelsSceneGraph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GigaVoxelsDatabasePager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GigaVoxelsDebugRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GigaVoxelsRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GigaVoxelsOctTree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GigaVoxelsOctTreeNodePool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GigaVoxelsBrickPool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GigaVoxelsShaderCodeTester.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GigaVoxelsReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GigaVoxelsSceneGraph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GigaVoxelsDatabasePager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GigaVoxelsDebugRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
