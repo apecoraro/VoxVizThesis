@@ -2,4 +2,4 @@
 This is the code that I wrote for my thesis project on volume rendering and specifically on GigaVoxel terrain generation and rendering. The software is implemented in C++ using OpenGL, CUDA, and Qt.
 
 # Thesis Video
-https://youtu.be/RPfjfjC9hPQ
+https://youtu.be/RPfjfjC9hP0
